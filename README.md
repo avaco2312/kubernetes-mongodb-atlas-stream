@@ -99,6 +99,7 @@ Connection: close
   "Categoria": "Opera",
   "Estado": "A"
 }
+```
 
 En el caso de un update el único posible, de acuerdo a lo implementado, es cancelar el evento. Esto se propaga al inventario, donde también el estado pasa de "A" a "C". Otro servicio de fondo, streamInventario propagará el cambio en inventario a todas las reservas existentes para ese evento, poiéndolas en estado "C" (evento cancelado"). Y a su vez este cambio en esas reservas disparará el servicio streamNotificacion que enviará una notificación por email informando al usuario de la cancelación.
 
