@@ -138,7 +138,7 @@ Sobre estos parámetros:
 		}},
 ```
 - Con este pipeline se garantiza que sólo se reciban los cambios asociados a un insert o un update. También copia el cambo capacidad en un nuevo campo llamado disponible (el campo capacidad se elimina al insertar posteriormente el documento en la colección inventario).
-- Proporcionamos la función que queremos se ejecute cada vez que se detecte un cambio, que hemos llamado procesa. Al ser disparada nos trae como parámetros un documento que representa el cambio detectado y un token que identifica únicamente este cambio. Nuestra implementación de ConnectStream hace que el documento devuelto contenga el evento cambiado tal y como quedó después de la modificación.
+- Proporcionamos la función que queremos se ejecute cada vez que se detecte un cambio, que hemos llamado procesa. Al ser disparada nos trae como parámetros un documento que representa el cambio detectado y un token que identifica de manera única este cambio. Nuestra implementación de ConnectStream hace que el documento devuelto contenga el evento cambiado tal y como quedó después de la modificación.
 - En base a este documento podemos realizar dentro de la función proporcionada los cambios necesarios en otras colecciones. En el caso de streamInventario, por ejemplo, cuando recibe un insert, inserta un documento en la colección inventario, idéntico al de la colección eventos, salvo el campo capacidad cambiado a disponible.
 
 Comentemos la función ConnectStream. 
