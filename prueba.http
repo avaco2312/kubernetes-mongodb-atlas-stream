@@ -1,0 +1,99 @@
+GET http://localhost/eventos/Opera%20Rigoletto
+
+###
+
+GET http://localhost/eventos
+
+###
+POST http://localhost/eventos
+
+{
+        "nombre":   "Opera Rigoletto",
+        "capacidad": 20,
+        "categoria": "Opera"
+}
+
+###
+
+POST http://localhost/eventos
+
+{
+        "nombre":   "Opera Aida",
+        "capacidad": 20,
+        "categoria": "Opera"
+}
+
+###
+
+POST http://localhost/eventos
+
+{
+        "nombre":   "Stairway to Heaven",
+        "capacidad": 50,
+        "categoria": "Hard Rock"
+}
+
+###
+
+DELETE http://localhost/eventos/Opera%20Rigoletto
+
+###
+
+DELETE http://localhost/eventos/Stairway%20to%20Heaven
+
+###
+
+DELETE http://localhost/eventos/Opera%20Aida
+
+###
+
+GET http://localhost/reservas/inventario
+
+###
+
+GET http://localhost/reservas/inventario/Opera%20Rigoletto
+
+###
+
+GET http://localhost/reservas/Opera%20Aida/avaco.digital@gmail.com
+
+###
+
+GET http://localhost/reservas/62ef569faaa134dda655ec77
+
+###
+
+POST http://localhost/reservas
+
+{
+        "evento":   "Opera Rigoletto",
+        "cantidad": 3,
+        "email": "avaco.digital@gmail.com"
+}
+
+###
+
+POST http://localhost/reservas
+
+{
+        "evento":   "Opera Aida",
+        "cantidad": 4,
+        "email": "avaco.digital@gmail.com"
+}  
+
+###
+
+POST http://localhost/reservas
+
+{
+        "evento":   "Stairway to Heaven",
+        "cantidad": 4,
+        "email": "avaco.digital@gmail.com"
+}  
+
+###
+
+DELETE http://localhost/reservas/62f1a0df2e1846ad8f7ac009
+
+###
+

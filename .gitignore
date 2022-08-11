@@ -1,0 +1,8 @@
+.vscode/launch.json
+clientes-go/eventos/eventos
+clientes-go/reservas/reservas
+clientes-go/streamEvento/streamEvento
+clientes-go/streamInventario/streamInventario
+clientes-go/streamNotificacion/streamNotificacion
+clientes-go/streamReserva/streamReserva
+local

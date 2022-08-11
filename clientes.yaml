@@ -1,0 +1,276 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: clientes
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name:  eventos
+  namespace: clientes
+  labels:
+    app:  eventos
+spec:
+  selector:
+    matchLabels:
+      app: eventos
+  replicas: 1
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app:  eventos
+    spec:
+      containers:
+      - name:  eventos
+        image:  boletia/seventos
+        imagePullPolicy: Never
+        env:
+        - name: MONGO_URL
+          value: {su_mongodb_atlas_connection_string}
+        resources:
+          requests:
+            cpu: 100m
+            memory: 100Mi
+          limits:
+            cpu: 100m
+            memory: 100Mi
+        ports:
+        - containerPort:  8070
+          name:  http
+      restartPolicy: Always
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: eventos
+  namespace: clientes
+spec:
+  selector:
+    app: eventos
+  type: ClusterIP
+  sessionAffinity: None
+  sessionAffinityConfig:
+    clientIP:
+      timeoutSeconds: 10800
+  ports:
+    - name: eventos
+      protocol: TCP
+      port: 8070
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name:  reservas
+  namespace: clientes
+  labels:
+    app:  reservas
+spec:
+  selector:
+    matchLabels:
+      app: reservas
+  replicas: 1
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app:  reservas
+    spec:
+      containers:
+      - name:  reservas
+        image:  boletia/sreservas
+        imagePullPolicy: Never
+        env:
+        - name: MONGO_URL
+          value: {su_mongodb_atlas_connection_string}
+        resources:
+          requests:
+            cpu: 100m
+            memory: 100Mi
+          limits:
+            cpu: 100m
+            memory: 100Mi
+        ports:
+        - containerPort:  8071
+          name:  http
+      restartPolicy: Always
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: reservas
+  namespace: clientes
+spec:
+  selector:
+    app: reservas
+  type: ClusterIP
+  sessionAffinity: None
+  sessionAffinityConfig:
+    clientIP:
+      timeoutSeconds: 10800
+  ports:
+    - name: eventos
+      protocol: TCP
+      port: 8071
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name:  sevento
+  namespace: clientes
+  labels:
+    app:  sevento
+spec:
+  selector:
+    matchLabels:
+      app: sevento
+  replicas: 1
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app:  sevento
+    spec:
+      containers:
+      - name:  sevento
+        image:  boletia/ssevento
+        imagePullPolicy: Never
+        env:
+        - name: MONGO_URL
+          value: {su_mongodb_atlas_connection_string}
+        resources:
+          requests:
+            cpu: 100m
+            memory: 100Mi
+          limits:
+            cpu: 100m
+            memory: 100Mi
+      restartPolicy: Always
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name:  sreserva
+  namespace: clientes
+  labels:
+    app:  sreserva
+spec:
+  selector:
+    matchLabels:
+      app: sreserva
+  replicas: 1
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app:  sreserva
+    spec:
+      containers:
+      - name:  sreserva
+        image:  boletia/ssreserva
+        imagePullPolicy: Never
+        env:
+        - name: MONGO_URL
+          value: {su_mongodb_atlas_connection_string}
+        resources:
+          requests:
+            cpu: 100m
+            memory: 100Mi
+          limits:
+            cpu: 100m
+            memory: 100Mi
+      restartPolicy: Always
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name:  sinventario
+  namespace: clientes
+  labels:
+    app:  sinventario
+spec:
+  selector:
+    matchLabels:
+      app: sinventario
+  replicas: 1
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app:  sinventario
+    spec:
+      containers:
+      - name:  sinventario
+        image:  boletia/ssinventario
+        imagePullPolicy: Never
+        env:
+        - name: MONGO_URL
+          value: {su_mongodb_atlas_connection_string}
+        resources:
+          requests:
+            cpu: 100m
+            memory: 100Mi
+          limits:
+            cpu: 100m
+            memory: 100Mi
+      restartPolicy: Always
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name:  snotificacion
+  namespace: clientes
+  labels:
+    app:  snotificacion
+spec:
+  selector:
+    matchLabels:
+      app: snotificacion
+  replicas: 1
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app:  snotificacion
+    spec:
+      containers:
+      - name:  snotificacion
+        image:  boletia/ssnotificacion
+        imagePullPolicy: Never
+        env:
+        - name: MONGO_URL
+          value: {su_mongodb_atlas_connection_string}        
+        - name: SENDER_EMAIL
+          value: {su_email_aws_ses}
+        resources:
+          requests:
+            cpu: 100m
+            memory: 100Mi
+          limits:
+            cpu: 100m
+            memory: 100Mi
+      restartPolicy: Always
