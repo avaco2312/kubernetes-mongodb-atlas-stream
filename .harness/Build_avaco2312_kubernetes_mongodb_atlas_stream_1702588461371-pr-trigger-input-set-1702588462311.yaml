@@ -1,0 +1,14 @@
+inputSet:
+  name: Build_avaco2312_kubernetes_mongodb_atlas_stream_1702588461371-pr-trigger-input-set
+  identifier: Build_avaco2312_kubernetes_mongodb_atlas_stream_1702588461371prtriggerinputset
+  orgIdentifier: default
+  projectIdentifier: default_project
+  pipeline:
+    identifier: Build_avaco2312_kubernetes_mongodb_atlas_stream_1702588461371
+    properties:
+      ci:
+        codebase:
+          build:
+            type: PR
+            spec:
+              number: <+trigger.prNumber>
