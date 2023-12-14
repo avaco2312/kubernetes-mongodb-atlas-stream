@@ -1,0 +1,12 @@
+inputSet:
+  pipeline:
+    identifier: Build_avaco2312_kubernetes_mongodb_atlas_stream_1702588461371
+    properties:
+      ci:
+        codebase:
+          build: ""
+    remoteBranch: master
+  name: prueba
+  identifier: prueba
+  orgIdentifier: default
+  projectIdentifier: default_project
